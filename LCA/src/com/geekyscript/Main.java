@@ -1,7 +1,6 @@
 package com.geekyscript;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Stack;
 
 public class Main {
@@ -24,13 +23,24 @@ public class Main {
                 st.push(t);
             }
         }
-        ArrayList<Integer> ans = Path(root, 110);
-        System.out.println("Path from Node to root " + ans);
-        Collections.reverse(ans);
-        System.out.println("Path from root to node " + ans);
-
+        System.out.println(lca(root, 110, 70));
     }
 
+    public static int lca(Node node, int d1,int d2){
+        ArrayList<Integer> p1 = Path(node, d1);
+        ArrayList<Integer> p2 = Path(node, d2);
+
+        int i = p1.size()-1;
+        int j = p2.size()-1;
+
+        while(i>=0 && j>=0 && p1.get(i)==p2.get(j)){
+            i--;
+            j--;
+        }
+        i++;
+        j++;
+        return p1.get(i);
+    }
     public static ArrayList<Integer> Path(Node node, int data){
         if(node.data == data){
             ArrayList<Integer> list = new ArrayList<>();
